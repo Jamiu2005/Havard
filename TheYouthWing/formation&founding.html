@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Torchbearer of SUDAI's Vision</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #141422;
+            --secondary-color: #6c757d;
+            --accent-color: #7b1fa2;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .hero {
+            background-color: var(--primary-color);
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            padding: 3rem 0;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-image {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            height: auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            padding: 1.5rem;
+            border-left: 3px solid var(--accent-color);
+            margin-bottom: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .timeline-item h3 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: #141422 !important;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ededed27;
+        }
+        .nav-link {
+            color: white !important;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            color: #ff0000 !important;
+        }
+        .custom-btn {
+            background: transparent;
+            border: 2px solid #ff0000;
+            border-radius: 5px;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            margin-left: 1rem;
+        }
+        .custom-btn:hover {
+            background: #ff0000;
+            color: white;
+        }
+        .navbar-brand {
+            color: white !important;
+        }
+        .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .dropdown-item {
+            color: white;
+        }
+
+        /* Content Text Sizing */
+        .col-lg-8 h2 {
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .col-lg-8 p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+        }
+         /* Voice of the Youth Styles */
+         #youthStoriesCarousel {
+          border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .youth-story-card {
+            background-color: transparent;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .youth-story-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+        }
+        
+        .youth-story-quote {
+            position: relative;
+        }
+        
+        .quote-icon {
+            color: #E6284B;
+            font-size: 2rem;
+            opacity: 0.2;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+        }
+        
+        .youth-story-quote p {
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-style: italic;
+            color: #495057;
+            z-index: 1;
+        }
+        
+        #youthStoriesCarousel .carousel-indicators {
+            bottom: -40px;
+        }
+        
+        #youthStoriesCarousel .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #dee2e6;
+            opacity: 0.5;
+            margin: 0 5px;
+        }
+        
+        #youthStoriesCarousel .carousel-indicators button.active {
+            background-color: #E6284B;
+            opacity: 1;
+        }
+        
+        #youthStoriesCarousel .carousel-control-prev,
+        #youthStoriesCarousel .carousel-control-next {
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            transform: scale(1.2);
+        }
+        
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 20px;
+            height: 20px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        
+        .carousel-control-next {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        #youthStoriesCarousel .carousel-control-prev {
+            left: -20px;
+        }
+        
+        #youthStoriesCarousel .carousel-control-next {
+            right: -20px;
+        }
+        
+        #youthStoriesCarousel .carousel-control-prev:hover,
+        #youthStoriesCarousel .carousel-control-next:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 767.98px) {
+            #youthStoriesCarousel .carousel-control-prev,
+            #youthStoriesCarousel .carousel-control-next {
+                display: none;
+            }
+            
+            .youth-story-content {
+                min-height: 280px;
+            }
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        .carousel-indicators [data-bs-target] {
+            width: 30px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin-right: 8px;
+            margin-left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicators .active {
+            background-color: #fff;
+            width: 50px;
+        }
+        
+        /* Remove padding from carousel control buttons */
+        .carousel-control-prev, .carousel-control-next {
+            padding: 0;
+            width: 5%;
+            opacity: 0.7;
+        }
+        
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            opacity: 1;
+        }
+        
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+        }
+        
+        /* Carousel content styling */
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 7%;
+            transform: translateY(-50%);
+            margin-top: 100px;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+            text-align: left;
+            padding: 25px;
+        }
+        
+        .carousel-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.6);
+        }
+        
+        .carousel-content small {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .carousel-content .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #E6284B;
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .carousel-content .btn:hover {
+            background-color: transparent;
+            border-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="img/youth-wing_logo-removebg-preview.png" alt="Sudai Youthwing" style="width: 70px; height: 70px; background-color: white; padding: 10px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ABOUT US
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Web Development</a></li>
+                            <li><a class="dropdown-item" href="#">Mobile Apps</a></li>
+                            <li><a class="dropdown-item" href="#">Digital Marketing</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            THE YOUTHWING
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Formation & Founding</a></li>
+                            <li><a class="dropdown-item" href="#">Mission, Vision & Objectives</a></li>
+                            <li><a class="dropdown-item" href="#">Current National Executives</a></li>
+                            <li><a class="dropdown-item" href="#">Past National Executives</a></li>
+                            <li><a class="dropdown-item" href="zonal.html">Zonal Amir & Amirah</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            PROGRAMS
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Ramadan Lecture</a></li>
+                            <li><a class="dropdown-item" href="#">Sister's Seminar</a></li>
+                            <li><a class="dropdown-item" href="#">Training the Trainers Course</a></li>
+                            <li><a class="dropdown-item" href="#">SS3 Get-Together</a></li>
+                            <li><a class="dropdown-item" href="#">Master Class</a></li>
+                            <li><a class="dropdown-item" href="#">Islamic Training Course</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            RESOURCES
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Our Team</a></li>
+                            <li><a class="dropdown-item" href="#">History</a></li>
+                            <li><a class="dropdown-item" href="#">Mission</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            GET INVOLVED
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Our Team</a></li>
+                            <li><a class="dropdown-item" href="#">History</a></li>
+                            <li><a class="dropdown-item" href="#">Mission</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button class="custom-btn">Sign Up</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <small>FORMATION & FOUNDING</small>
+                    <h1>The Birth of SUDAI Youth Wing</h1>
+                    <p>Discover the origins of the SUDAI Youth Wing and how it was formed to empower the next generation of Muslim leaders.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container content-section">
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- A New Chapter in SUDAI -->
+                <section class="mb-5">
+                    <h2>The SUDAI Youth Wing was formed as a direct response to the growing need for the empowerment of young Muslims.</h2>
+                    <p>Recognizing that the future of the Muslim Ummah lies in the hands of its youth, Shams-Ud-Deen Al-Islamiy (SUDAI) sought to create a platform that would nurture, guide, and equip the younger generation with the necessary tools to become effective leaders in their communities and beyond.
+                        The foundation of the Youth Wing marked a pivotal moment in the journey of SUDAI, providing youth with a space where they could actively engage with their faith, contribute to the community, and build leadership skills grounded in Islamic teachings.</p>
+                </section>
+
+                <!-- Leadership and Focus -->
+                <section class="mb-5">
+                    <h2>A Vision for the Future</h2>
+                    <p>The idea for the SUDAI Youth Wing was born from the vision of Sheikh Abd. Hameed (R.T.A), the founder of SUDAI. He recognized that the strength and success of any community lie in the active participation and development of its youth. Sheikh Abd. Hameed (R.T.A) saw that the younger generation, if properly nurtured, would be the driving force behind the mission of moral, spiritual, and educational reformation.</p>
+
+                    <p>With this vision in mind, the Youth Wing was established to provide astructured space for young Muslims aged 1 day to 45 years to come together, learn, and grow in a supportive environment. The Youth Wing’score principles of unity, knowledge, discipline, and service continue to serve as a guide for the many programs and activities designed for youth development.</p>
+                </section>
+                <section class="mb-5">
+                    <h2>The Founding of the Youth Wing</h2>
+                    <p>
+                        The official formation of the SUDAI Youth Wing came after careful planning and deliberation by the SUDAI leadership. With support from the National Executive Council, the Youth Wing was inaugurated as a branch of SUDAI that would be specifically dedicated to youth empowerment.
+
+                        The initial members of the Youth Wing were a group of passionate and committed young Muslims who shared the vision of creating a unified, educated, and morally grounded generation. These early members played a crucial role in shaping the programs and activities that would serve as the foundation for the Youth Wing’s future success.
+                    </p>
+                </section>
+                <section class="mb-5">
+                    <h2>A Legacy of Empowerment</h2>
+                    <p>Since its founding, the SUDAI Youth Wing has grown into a vibrant and dynamic force within the organization. It has played a significant role in carrying out SUDAI’s mission of moral reformation, education, and community service through youth-centered programs and initiatives.
+
+                    The Youth Wing continues to empower young Muslims by providing them with the resources, mentorship, and opportunities they need to become active contributors to both their faith and society. Through its programs, the Youth Wing has become a vital part of SUDAI’s broader mission to create a positive impact within the Muslim community and beyond.</p>
+                </section>
+                <section class="mb-5">
+                    <h2>Looking Ahead: The Future of the Youth Wing</h2>
+                    <p>The SUDAI Youth Wing remains committed to its founding mission of fostering the next generation of Muslim leaders. As the world continues to evolve, the Youth Wing continues to adapt, ensuring that young Muslims are equipped to meet the challenges of the future while remaining true to the values of Islam.
+
+                    With its roots firmly planted in the vision of Sheikh Abd. Hameed (R.T.A), the Youth Wing’s mission of spiritual growth, leadership, and community service will continue to shape the future of SUDAI for years to come. The Youth Wing is not just a part of SUDAI’s history but a central piece of its ongoing journey toward building a brighter, more unified future for the Muslim Ummah.</p>
+                </section>
+            </div>
+
+
+            <div class="col-lg-5 offset-lg-1">
+                <img src="img/chief-missioner.png" alt="Chief Missioner" class="profile-image mb-4">
+            </div>
+        </div>
+    </div>
+    <section id="youth-voices" class="youth-voices-section py-5" style="background-color: #141422; color: white; border-bottom: 1px solid #ededed;">
+        <div class="container">
+          <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+              <h6 class="text-danger fw-bold mb-2">VOICE OF THE YOUTH</h6>
+              <h2 class="mb-4">Inspiring Stories from Our Youth</h2>
+              <p class="lead">Hear directly from our youth members about their journeys, experiences, and growth.</p>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div id="youthStoriesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
+                
+                <div class="carousel-inner">
+                  <!-- Story 1 -->
+                  <div class="carousel-item active">
+                    <div class="youth-story-card">
+                      <div class="youth-story-content p-4 p-md-5">
+                        <div class="youth-story-quote">
+                          <i class="ri-double-quotes-l quote-icon"></i>
+                          <p class="mb-4">Being part of the SUDAI Youth Wing has transformed my life. I've developed leadership skills, deepened my understanding of Islam, and found a supportive community that feels like family.</p>
+                        </div>
+                        <div class="youth-story-author text-end">
+                          <h5 class="mb-1">Ahmed Ibrahim</h5>
+                          <p class="mb-0 text-muted">Youth Leader, 22 years old</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Story 2 -->
+                  <div class="carousel-item">
+                    <div class="youth-story-card">
+                      <div class="youth-story-content p-4 p-md-5">
+                        <div class="youth-story-quote">
+                          <i class="ri-double-quotes-l quote-icon"></i>
+                          <p class="mb-4">The Quranic studies program changed my relationship with the Quran. I went from barely being able to read to memorizing several surahs and understanding their meanings. The mentorship I received was invaluable.</p>
+                        </div>
+                        <div class="youth-story-author text-end">
+                          <h5 class="mb-1">Fatima Hassan</h5>
+                          <p class="mb-0 text-muted">Quran Program Graduate, 19 years old</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Story 3 -->
+                  <div class="carousel-item">
+                    <div class="youth-story-card">
+                      <div class="youth-story-content p-4 p-md-5">
+                        <div class="youth-story-quote">
+                          <i class="ri-double-quotes-l quote-icon"></i>
+                          <p class="mb-4">Through the community service initiatives, I've learned that my faith is not just about personal spirituality but about making a positive impact in the world. The monthly service days have become the highlight of my month.</p>
+                        </div>
+                        <div class="youth-story-author text-end">
+                          <h5 class="mb-1">Yusuf Omar</h5>
+                          <p class="mb-0 text-muted">Community Service Volunteer, 25 years old</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#youthStoriesCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#youthStoriesCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+    <footer class="text-white pt-5 pb-4" style="background-color: #141422;">
+        <div class="container">
+          <div class="row">
+            <!-- Contact Information -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+              <img src="img/youth-wing_logo-removebg-preview.png" alt="" class="mb-5" style="width: 100px; height: 100px; background-color: white; padding: 10px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+              <p class="mb-3"><i class="ri-map-pin-line me-2"></i>01, Address Location, City, State, Country. PO Box: 1234</p>
+              <p class="mb-3"><i class="ri-mail-line me-2"></i>info@sudaiyw.org</p>
+              <p class="mb-3"><i class="ri-phone-line me-2"></i>+234 812 345 6789</p>
+              <div class="social-links mt-4">
+                <a href="#" class="me-2 text-white"><i class="ri-facebook-fill"></i></a>
+                <a href="#" class="me-2 text-white"><i class="ri-twitter-fill"></i></a>
+                <a href="#" class="me-2 text-white"><i class="ri-instagram-line"></i></a>
+                <a href="#" class="me-2 text-white"><i class="ri-youtube-fill"></i></a>
+              </div>
+            </div>
+            
+            <!-- The Youthwing Links -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+              <h5 class="text-uppercase mb-4">The Youthwing</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Formation & Founding</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Mission, Vision & Objectives</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Current National Executives</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Past National Executives</a></li>
+                <li class="mb-2"><a href="zonal.html" class="text-white text-decoration-none">Zonal Amir & Amirah</a></li>
+              </ul>
+            </div>
+            
+            <!-- Programs Links -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+              <h5 class="text-uppercase mb-4">Programs</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Ramadan Lecture</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sister's Seminar</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Training the Trainers Course</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">SS3 Get-Together</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Master Class</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Islamic Training Course</a></li>
+              </ul>
+            </div>
+            
+            <!-- Get Involved Links -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+              <h5 class="text-uppercase mb-4">Get Involved</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Membership Registration</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Become a Volunteer</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Make a Donation</a></li>
+                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Partner with Us</a></li>
+              </ul>
+            </div>
+            
+            <!-- Newsletter Signup -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+              <h5 class="text-uppercase mb-4">Newsletter</h5>
+              <p>Sign up for our newsletter to receive the latest updates.</p>
+              <form class="mt-3">
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" placeholder="Your email" aria-label="Your email" required>
+                  <button class="btn btn-danger" type="submit">Subscribe</button>
+                </div>
+                <small class="form-text text-muted">By submitting your email, you'll be the first to know about upcoming updates. You can unsubscribe at any time.</small>
+              </form>
+            </div>
+          </div>
+          
+          <!-- Copyright and Legal Links -->
+          <div class="row mt-4 pt-4 border-top border-secondary">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2025 SUDAI Youthwing. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+              <ul class="list-inline mb-0">
+                <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Terms of Use</a></li>
+                <li class="list-inline-item mx-3">|</li>
+                <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
+                <li class="list-inline-item mx-3">|</li>
+                <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Cookies</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+

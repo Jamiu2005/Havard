@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudai Youthwing | Zonal Amir & Amirah</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        .hero {
+            background-color: #141422;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            padding: 2rem;
+        }
+
+        .navbar {
+            background-color: #141422 !important;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ededed27;
+        }
+
+        .nav-link {
+            color: white !important;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-link:hover {
+            color: #ff0000 !important;
+        }
+
+        .custom-btn {
+            background: transparent;
+            border: 2px solid #ff0000;
+            border-radius: 5px;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            margin-left: 1rem;
+        }
+
+        .custom-btn:hover {
+            background: #ff0000;
+            color: white;
+        }
+
+        .navbar-brand {
+            color: white !important;
+        }
+
+        .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .dropdown-item {
+            color: white;
+        }
+
+        /* Division Tabs Styling */
+        .division-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .division-tabs .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .division-tabs .btn-light {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+
+        /* Table Styling */
+        .table {
+            margin-top: 1rem;
+        }
+
+        .table thead th {
+            border-bottom: 2px solid #dee2e6;
+            padding: 1rem 0.5rem;
+        }
+
+        .table tbody td {
+            padding: 1rem 0.5rem;
+            color: #212529;
+        }
+
+        .table tbody td.text-muted {
+            color: #6c757d !important;
+        }
+
+        .table-responsive {
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            padding: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="img/youth-wing_logo-removebg-preview.png" alt="Sudai Youthwing"
+                    style="width: 70px; height: 70px; background-color: white; padding: 10px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            ABOUT US
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Web Development</a></li>
+                            <li><a class="dropdown-item" href="#">Mobile Apps</a></li>
+                            <li><a class="dropdown-item" href="#">Digital Marketing</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            THE YOUTHWING
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Formation & Founding</a></li>
+                            <li><a class="dropdown-item" href="#">Mission, Vision & Objectives</a></li>
+                            <li><a class="dropdown-item" href="#">Current National Executives</a></li>
+                            <li><a class="dropdown-item" href="#">Past National Executives</a></li>
+                            <li><a class="dropdown-item" href="zonal.html">Zonal Amir & Amirah</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            PROGRAMS
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Ramadan Lecture</a></li>
+                            <li><a class="dropdown-item" href="#">Sister's Seminar</a></li>
+                            <li><a class="dropdown-item" href="#">Training the Trainers Course</a></li>
+                            <li><a class="dropdown-item" href="#">SS3 Get-Together</a></li>
+                            <li><a class="dropdown-item" href="#">Master Class</a></li>
+                            <li><a class="dropdown-item" href="#">Islamic Training Course</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            RESOURCES
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Our Team</a></li>
+                            <li><a class="dropdown-item" href="#">History</a></li>
+                            <li><a class="dropdown-item" href="#">Mission</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            GET INVOLVED
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Our Team</a></li>
+                            <li><a class="dropdown-item" href="#">History</a></li>
+                            <li><a class="dropdown-item" href="#">Mission</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button class="custom-btn">Sign Up</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="title-text">
+                <span></span>
+                <small>ZONAL AMIR & AMIRAH</small>
+            </div>
+            <h1>Our Comunnity Leader <br> and Unity</h1>
+        </div>
+    </div>
+
+    <div class="leader-content p-5">
+        <div class="division-tabs mb-4">
+            <button class="btn btn-danger active">Division 1</button>
+            <button class="btn btn-light">Division 2</button>
+            <button class="btn btn-light">Division 3</button>
+            <button class="btn btn-light">Division 4</button>
+            <button class="btn btn-light">Division 5</button>
+        </div>
+
+        <h2 class="mb-4">Division 1</h2>
+
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
+                    <tr class="border-bottom">
+                        <th scope="col" class="h5 fw-bold">Alh. Imraina Abubakri</th>
+                        <th scope="col" class="h5">Chairman</th>
+                        <th scope="col" class="h5">08066858048</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-muted">01</td>
+                        <td>Alh Ibrahim Bisiriyu Atare</td>
+                        <td>Ado-Odo</td>
+                        <td>08080683860</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">02</td>
+                        <td>Alh Lateef Bisiriyu</td>
+                        <td>Agbara</td>
+                        <td>08025861816</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">03</td>
+                        <td>Alfa Wasiu Adeoye</td>
+                        <td>Atan</td>
+                        <td>09051201430</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">04</td>
+                        <td>Alh Abd Rahmon Popoola</td>
+                        <td>Ihereko/Badagry</td>
+                        <td>08038608503</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">05</td>
+                        <td>Alfa Qasim Badmus</td>
+                        <td>Idiroko</td>
+                        <td>08030992215</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">06</td>
+                        <td>Alh Imraina Bakri</td>
+                        <td>Ijoko</td>
+                        <td>08066858048</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">07</td>
+                        <td>Alfa Fatal Olushina</td>
+                        <td>Iyama-Iyesi</td>
+                        <td>08028503669</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">08</td>
+                        <td>Alfa Kabiru Yusuff</td>
+                        <td>Kajola</td>
+                        <td>08136451345</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">09</td>
+                        <td>Alfa Bashiru Folashan</td>
+                        <td>Otta</td>
+                        <td>08029268250</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">10</td>
+                        <td>Alfa Sherifideen Tijani</td>
+                        <td>Robiyan</td>
+                        <td>08023942339</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">11</td>
+                        <td>Alh Roufiu Adedokun</td>
+                        <td>Sango</td>
+                        <td>08038572236</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="text-white pt-5 pb-4" style="background-color: #141422;">
+            <div class="container">
+                <div class="row">
+                    <!-- Contact Information -->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                        <img src="img/youth-wing_logo-removebg-preview.png" alt="" class="mb-5"
+                            style="width: 100px; height: 100px; background-color: white; padding: 10px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <p class="mb-3"><i class="ri-map-pin-line me-2"></i>01, Address Location, City, State, Country.
+                            PO Box: 1234</p>
+                        <p class="mb-3"><i class="ri-mail-line me-2"></i>info@sudaiyw.org</p>
+                        <p class="mb-3"><i class="ri-phone-line me-2"></i>+234 812 345 6789</p>
+                        <div class="social-links mt-4">
+                            <a href="#" class="me-2 text-white"><i class="ri-facebook-fill"></i></a>
+                            <a href="#" class="me-2 text-white"><i class="ri-twitter-fill"></i></a>
+                            <a href="#" class="me-2 text-white"><i class="ri-instagram-line"></i></a>
+                            <a href="#" class="me-2 text-white"><i class="ri-youtube-fill"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- The Youthwing Links -->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                        <h5 class="text-uppercase mb-4">The Youthwing</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Formation &
+                                    Founding</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Mission, Vision &
+                                    Objectives</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Current National
+                                    Executives</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Past National
+                                    Executives</a></li>
+                            <li class="mb-2"><a href="zonal.html" class="text-white text-decoration-none">Zonal Amir & Amirah</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Programs Links -->
+                    <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                        <h5 class="text-uppercase mb-4">Programs</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Ramadan Lecture</a>
+                            </li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sister's Seminar</a>
+                            </li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Training the Trainers
+                                    Course</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">SS3 Get-Together</a>
+                            </li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Master Class</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Islamic Training
+                                    Course</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Get Involved Links -->
+                    <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                        <h5 class="text-uppercase mb-4">Get Involved</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Membership
+                                    Registration</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Become a Volunteer</a>
+                            </li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Make a Donation</a>
+                            </li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Partner with Us</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Newsletter Signup -->
+                    <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                        <h5 class="text-uppercase mb-4">Newsletter</h5>
+                        <p>Sign up for our newsletter to receive the latest updates.</p>
+                        <form class="mt-3">
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="Your email"
+                                    aria-label="Your email" required>
+                                <button class="btn btn-danger" type="submit">Subscribe</button>
+                            </div>
+                            <small class="form-text text-muted">By submitting your email, you'll be the first to know
+                                about upcoming updates. You can unsubscribe at any time.</small>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Copyright and Legal Links -->
+                <div class="row mt-4 pt-4 border-top border-secondary">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 SUDAI Youthwing. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Terms of
+                                    Use</a></li>
+                            <li class="list-inline-item mx-3">|</li>
+                            <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Privacy
+                                    Policy</a></li>
+                            <li class="list-inline-item mx-3">|</li>
+                            <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Cookies</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Initialize popovers
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl)
+            })
+        </script>
+</body>
+
+</html>

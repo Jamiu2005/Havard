@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Css Links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        .carousel-navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20; /* Increased to be above the overlay */
+            background-color: transparent !important;
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)) !important;
+            padding-top: 20px;
+        }
+
+        /* Carousel controls styling */
+        /* Remove carousel controls */
+        .carousel-control-prev,
+        .carousel-control-next {
+            display: none;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.1);
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 20px;
+            height: 20px;
+            background-image: none;
+        }
+
+        .carousel-control-prev::before,
+        .carousel-control-next::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E") no-repeat center center;
+            background-size: 100%;
+        }
+
+        .carousel-control-next::before {
+            transform: rotate(180deg);
+        }
+
+        /* Container with border aligned with padding */
+        .carousel-navbar .container-fluid {
+            padding-left: 7%;
+            padding-right: 7%;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+            padding-bottom: 15px;
+        }
+        .navbar {
+            background-color: #141422 !important;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ededed27;
+        }
+        .nav-link {
+            color: white !important;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            color: #ff0000 !important;
+        }
+        .custom-btn {
+            background: transparent;
+            border: 2px solid #ff0000;
+            border-radius: 5px;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            margin-left: 1rem;
+        }
+        .custom-btn:hover {
+            background: #ff0000;
+            color: white;
+        }
+        .navbar-brand {
+            color: white !important;
+        }
+        .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .dropdown-item {
+            color: white;
+        }
+        /* Carousel overlay */
+        .carousel-image-overlay {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-image-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        
+        .navbar-brand {
+            color: white !important;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        .carousel-item {
+            position: relative;
+        }
+        .carousel-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+            z-index: 1;
+        }
+        .carousel-item img {
+            height: 100vh;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        /* Ensure controls are above the overlay */
+        .carousel-control-prev, .carousel-control-next, .carousel-indicators {
+            z-index: 2;
+        }
+        
+        /* Custom carousel indicators styling */
+        .carousel-indicators {
+            left: 7%;
+            right: auto;
+            margin-left: 0;
+            margin-right: 0;
+            justify-content: flex-start;
+            bottom: 30px;
+        }
+        
+        /* Prayer time styling */
+        .prayer-time {
+            position: absolute;
+            bottom: 30px;
+            right: 7%;
+            z-index: 5;
+            color: white;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .prayer-line {
+            display: inline-block;
+            width: 40px;
+            height: 2px;
+            background-color: white;
+            margin: 0 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .carousel-item {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .about-image img {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .programs-section .card {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .about-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .about-content .container .row{
+            justify-content: space-between;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+        
+        .about-content h2 {
+            font-weight: 700;
+            color: #212529;
+        }
+        
+        .about-content .lead {
+            font-size: 1.2rem;
+            color: #495057;
+        }
+        
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(13, 110, 253, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .icon-box i {
+            font-size: 1.5rem;
+            color: #E6284B;
+        }
+        
+        .carousel-indicators [data-bs-target] {
+            width: 30px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin-right: 8px;
+            margin-left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicators .active {
+            background-color: #fff;
+            width: 50px;
+        }
+        
+        /* Remove padding from carousel control buttons */
+        .carousel-control-prev, .carousel-control-next {
+            padding: 0;
+            width: 5%;
+            opacity: 0.7;
+        }
+        
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            opacity: 1;
+        }
+        
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+        }
+        
+        /* Carousel content styling */
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 7%;
+            transform: translateY(-50%);
+            margin-top: 100px;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+            text-align: left;
+            padding: 25px;
+        }
+        
+        .carousel-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.6);
+        }
+        
+        .carousel-content small {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .carousel-content .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #E6284B;
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .carousel-content .btn:hover {
+            background-color: transparent;
+            border-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 991.98px) {
+            .carousel-content {
+                left: 4%;
+                right: 4%;
+                max-width: 92%;
+                padding: 15px;
+                margin-top: 100px;
+            }
+            
+            /* Align navbar container on mobile */
+            .carousel-navbar .container-fluid {
+                padding-left: 4%;
+                padding-right: 4%;
+                border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+                padding-bottom: 12px;
+            }
+            
+            /* Adjust carousel indicators on mobile */
+            .carousel-indicators {
+                left: 4%;
+                bottom: 20px;
+            }
+            
+            /* Adjust prayer time on mobile */
+            .prayer-time {
+                right: 4%;
+                bottom: 20px;
+                font-size: 0.9rem;
+            }
+            
+            .prayer-line {
+                width: 30px;
+                margin: 0 8px;
+            }
+            
+            .carousel-indicators [data-bs-target] {
+                width: 25px;
+                height: 4px;
+                margin-right: 5px;
+            }
+            
+            .carousel-indicators .active {
+                width: 40px;
+            }
+            
+            /* About section responsive styling */
+            .about-section {
+                padding: 50px 0;
+            }
+            
+            .about-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .about-content .lead {
+                font-size: 1.1rem;
+            }
+            
+            .icon-box {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .icon-box i {
+                font-size: 1.2rem;
+            }
+            
+            .carousel-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .carousel-content small {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Partners Marquee Styles */
+        .partners-marquee-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .partners-marquee {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .partners-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+        
+        .partner-item {
+            flex: 0 0 200px;
+            margin: 0 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .partner-item:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Get Involved Link Styles */
+        .get-involved-link {
+            color: #E6284B;
+            text-decoration: none;
+            background-color: transparent;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .get-involved-link:hover {
+            background-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: none;
+        }
+        
+        .get-involved-link i {
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .get-involved-link:hover i {
+            transform: translateX(3px);
+        }
+        
+        .get-involved-link:first-child {
+            color: #fff;
+            background-color: #E6284B;
+        }
+        
+        .get-involved-link:first-child:hover {
+            background-color: #E6284B;
+        }
+        
+        /* Voice of the Youth Styles */
+        #youthStoriesCarousel {
+          border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .youth-story-card {
+            background-color: transparent;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .youth-story-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+        }
+        
+        .youth-story-quote {
+            position: relative;
+        }
+        
+        .quote-icon {
+            color: #E6284B;
+            font-size: 2rem;
+            opacity: 0.2;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+        }
+        
+        .youth-story-quote p {
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-style: italic;
+            color: #495057;
+            z-index: 1;
+        }
+        
+        #youthStoriesCarousel .carousel-indicators {
+            bottom: -40px;
+        }
+        
+        #youthStoriesCarousel .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #dee2e6;
+            opacity: 0.5;
+            margin: 0 5px;
+        }
+        
+        #youthStoriesCarousel .carousel-indicators button.active {
+            background-color: #E6284B;
+            opacity: 1;
+        }
+        
+        #youthStoriesCarousel .carousel-control-prev,
+        #youthStoriesCarousel .carousel-control-next {
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            transform: scale(1.2);
+        }
+        
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 20px;
+            height: 20px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        
+        .carousel-control-next {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        #youthStoriesCarousel .carousel-control-prev {
+            left: -20px;
+        }
+        
+        #youthStoriesCarousel .carousel-control-next {
+            right: -20px;
+        }
+        
+        #youthStoriesCarousel .carousel-control-prev:hover,
+        #youthStoriesCarousel .carousel-control-next:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 767.98px) {
+            #youthStoriesCarousel .carousel-control-prev,
+            #youthStoriesCarousel .carousel-control-next {
+                display: none;
+            }
+            
+            .youth-story-content {
+                min-height: 280px;
+            }
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            .carousel-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .partner-item {
+                flex: 0 0 150px;
+                margin: 0 15px;
+            }
+            
+            .carousel-content small {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            
+            .carousel-content .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Custom button styling */
+        .btn-outline-light {
+            color: white;
+            border-color: white;
+            border-radius: 7px;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+            border: 1px solid #E6284B;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: #E6284B;
+            border-color: #E6284B;
+        }
+        
+        /* Programs section styling */
+        .programs-section .card {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .programs-section .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+        }
+        
+        .programs-section .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .programs-section .badge {
+            font-size: 0.8rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 30px;
+        }
+        
+        /* Get Involved section styling */
+        .get-involved-section {
+            background-color: #f8f9fa;
+        }
+        
+        .get-involved-section .btn {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .get-involved-section .btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .get-involved-section .btn i {
+            transition: all 0.3s ease;
+        }
+        
+        .get-involved-section .btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Navbar adjustments for small screens */
+        /* @media (max-width: 991.98px) {
+            .navbar-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 1rem;
+            }
+            
+            .navbar-nav .nav-item {
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+            
+            .navbar-nav .nav-link {
+                padding: 0.5rem 0;
+                width: 100%;
+                text-align: left;
+            }
+            
+            .navbar-nav .dropdown-menu {
+                display: none;
+                margin-top: 0.5rem;
+                width: 100%;
+            }
+            
+            .navbar-nav .dropdown-menu.show {
+                display: block;
+            }
+            
+            
+            .navbar-nav .dropdown-item {
+                padding: 0.5rem 1rem;
+                border-radius: 7px;
+                border: 1px solid #E6284B;
+            }
+            
+            .navbar-nav .dropdown-item:hover {
+                background-color: #E6284B;
+                color: white;
+            }
+        } */
+    </style>
+</head>
+<body>
+
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="10000">
+        <!-- Navbar inside carousel -->
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="container">
+              <a class="navbar-brand" href="#">
+                  <i class="bi bi-bootstrap"></i> Brand
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Home</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Services
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Web Development</a></li>
+                              <li><a class="dropdown-item" href="#">Mobile Apps</a></li>
+                              <li><a class="dropdown-item" href="#">Digital Marketing</a></li>
+                          </ul>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              About
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Our Team</a></li>
+                              <li><a class="dropdown-item" href="#">History</a></li>
+                              <li><a class="dropdown-item" href="#">Mission</a></li>
+                          </ul>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Contact</a>
+                      </li>
+                      <li class="nav-item">
+                          <button class="custom-btn">Sign Up</button>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav> -->
+        <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Offcanvas navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle mx-lg-2" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                ABOUT US
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle mx-lg-2" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                THE YOUTHWING
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle mx-lg-2" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                PROGRAMS
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle mx-lg-2" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                RESOURCES
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle mx-lg-2" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                GET INVOLVED
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                    <button class="btn btn-outline-success" type="submit">CONTACT US</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        
+        <div class="prayer-time">
+          <span>Solatul Dhur</span>
+          <span class="prayer-line"></span>
+          <span>12:57pm</span>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="carousel-image-overlay">
+              <img src="img/sudai-hero.png" class="d-block w-100" alt="Nature landscape image">
+            </div>
+            <div class="carousel-content">
+              <h1 data-aos="fade-up" data-aos-delay="100">Empowering the <br>Next Generation of <br>Leaders</h1>
+              <small data-aos="fade-up" data-aos-delay="200">The Shams-Ud-Deen Al-Islamiy Youth Wing is dedicated to shaping a brighter future by
+                  empowering youth through education, spirituality, and unity.</small>
+              <a href="#" class="btn btn-danger" data-aos="fade-up" data-aos-delay="300">Learn More About Us <i class="ri-arrow-right-up-line"></i></a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-image-overlay">
+              <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1744&q=80" class="d-block w-100" alt="City skyline image">
+            </div>
+
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-image-overlay">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80" class="d-block w-100" alt="Beach paradise image">
+            </div>
+
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    
+      <!-- About Section -->
+      <section id="about" class="about-section py-5">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
+              <div class="about-image position-relative">
+                <img src="img/sudai-5.png" alt="Islamic Youth Group Praying" class="img-fluid rounded shadow-lg" style="max-height: 400px; object-fit: cover;">
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+              <div class="about-content ps-lg-5">
+                <h6 class="text-danger fw-bold mb-2">ABOUT US</h6>
+                <h2 class="mb-4">A Movement for a Purpose-Driven Generation</h2>
+                <p class="lead mb-4">The SUDAI Youth Wing is the heart of Shams-Ud-Deen Al-Islamiy's mission to empower the next generation of Muslim leaders.</p>
+                <p class="mb-4">Established to foster spiritual growth, educational development, and community engagement, we aim to cultivate a generation of disciplined, compassionate, and knowledgeable youth who are committed to the values of Islam.</p>
+                <p class="mb-4">Our Youth Wing is open to all Muslims aged 1 day to 45 years, whether married or not, and we are united by a shared commitment to Islamic teachings, the Qur'an, and the Sunnah. Through our programs, leadership development, and community outreach, we strive to create a better future for the Ummah and the world at large.</p>
+
+                <a href="#" class="btn btn-danger mt-2" data-aos="fade-up" data-aos-delay="200">Learn More <i class="ri-arrow-right-line"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Programs Section -->
+      <section id="programs" class="programs-section py-5" style="background-color: #141422;">
+        <div class="container">
+          <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto" data-aos="fade-up">
+              <h6 class="text-danger fw-bold mb-2">OUR PROGRAMS</h6>
+              <h2 class="text-white mb-4">Be Part of Our Upcoming Programs</h2>
+              <p class="lead text-white-50">Join us for these enriching events designed to strengthen faith, build community, and develop future leaders.</p>
+            </div>
+          </div>
+          <div class="row g-4">
+            <!-- Program Card 1 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1577212017308-55f90828be8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Quranic Studies Program">
+                <div class="card-body p-4">
+                  <div class="badge bg-danger mb-2">July 15-20, 2025</div>
+                  <h5 class="card-title">Quranic Studies Intensive</h5>
+                  <p class="card-text">A week-long immersive program focusing on Quranic recitation, memorization, and understanding the deeper meanings of selected surahs.</p>
+                  <a href="#" class="btn btn-outline-danger">Register Now</a>
+                </div>
+              </div>
+            </div>
+            <!-- Program Card 2 -->
+            <div class="col-md-4">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Youth Leadership Summit">
+                <div class="card-body p-4">
+                  <div class="badge bg-danger mb-2">August 5-7, 2025</div>
+                  <h5 class="card-title">Youth Leadership Summit</h5>
+                  <p class="card-text">A three-day conference designed to equip young Muslims with leadership skills, Islamic principles of governance, and community organizing.</p>
+                  <a href="#" class="btn btn-outline-danger">Register Now</a>
+                </div>
+              </div>
+            </div>
+            <!-- Program Card 3 -->
+            <div class="col-md-4">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1607246749106-0a2b287f7245?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Community Service Day">
+                <div class="card-body p-4">
+                  <div class="badge bg-danger mb-2">Monthly</div>
+                  <h5 class="card-title">Community Service Day</h5>
+                  <p class="card-text">Join us on the first Saturday of every month as we come together to serve our local community through various outreach and volunteer initiatives.</p>
+                  <a href="#" class="btn btn-outline-danger">Register Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trusted Partners Section -->
+      <section id="partners" class="partners-section py-3" style="background-color: #bdbdbd3b;">
+        <div class="container">
+          <div class="row text-center mb-4">
+            <div class="col-lg-8 mx-auto">
+              <h6 class="text-danger fw-bold mb-2">OUR TRUSTED PARTNERS</h6>
+            </div>
+          </div>
+          
+          <div class="partners-marquee-container">
+            <div class="partners-marquee">
+              <div class="partners-track">
+                <!-- Partner logos - first set -->
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+1" alt="Partner 1" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+2" alt="Partner 2" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+3" alt="Partner 3" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+4" alt="Partner 4" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+5" alt="Partner 5" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+6" alt="Partner 6" class="img-fluid">
+                </div>
+                
+                <!-- Partner logos repeated for continuous scrolling effect -->
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+1" alt="Partner 1" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+2" alt="Partner 2" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+3" alt="Partner 3" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+4" alt="Partner 4" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+5" alt="Partner 5" class="img-fluid">
+                </div>
+                <div class="partner-item">
+                  <img src="https://placehold.co/200x100/e9ecef/495057?text=Partner+6" alt="Partner 6" class="img-fluid">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+        </div>
+      </section>
+
+      <!-- Get Involved Section -->
+      <section id="get-involved" class="get-involved-section py-5">
+        <div class="container">
+          <div class="row align-items-center">
+            <!-- Image Column -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
+              <img src="img/sudai-2.jpg" alt="Get Involved" class="img-fluid rounded shadow-lg">
+            </div>
+            <!-- Content Column -->
+            <div class="col-lg-6">
+              <div class="get-involved-content">
+                <h6 class="text-danger fw-bold mb-2">GET INVOLVED</h6>
+                <h2 class="mb-4">Make a Difference Today</h2>
+                <p class="lead mb-4">Join us in shaping the future of our community!</p>
+                
+                <div class="d-grid gap-3">
+                  <a href="#" class="get-involved-link d-flex align-items-center p-3">
+                    <span>Membership Registration</span>
+                    <i class="ri-user-add-line ms-2"></i>
+                  </a>
+                  <a href="#" class="get-involved-link d-flex align-items-center p-3">
+                    <span>Become a Volunteer</span>
+                    <i class="ri-team-line ms-2"></i>
+                  </a>
+                  <a href="#" class="get-involved-link d-flex align-items-center p-3">
+                    <span>Make a Donation</span>
+                    <i class="ri-hand-heart-line ms-2"></i>
+                  </a>
+                  <a href="#" class="get-involved-link d-flex align-items-center p-3">
+                    <span>Partner with Us</span>
+                    <i class="ri-building-line ms-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Voice of the Youth Section -->
+      <section id="youth-voices" class="youth-voices-section py-5" style="background-color: #141422; color: white; border-bottom: 1px solid #ededed;">
+        <div class="container">
+          <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+              <h6 class="text-danger fw-bold mb-2">VOICE OF THE YOUTH</h6>
+              <h2 class="mb-4">Inspiring Stories from Our Youth</h2>
+              <p class="lead">Hear directly from our youth members about their journeys, experiences, and growth.</p>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div id="youthStoriesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
+                
+                <div class="carousel-inner">
+                  <!-- Story 1 -->
+                  <div class="carousel-item active">
+                    <div class="youth-story-card">
+                      <div class="youth-story-content p-4 p-md-5">
+                        <div class="youth-story-quote">
+                          <i class="ri-double-quotes-l quote-icon"></i>
+                          <p class="mb-4">Being part of the SUDAI Youth Wing has transformed my life. I've developed leadership skills, deepened my understanding of Islam, and found a supportive community that feels like family.</p>
+                        </div>
+                        <div class="youth-story-author text-end">
+                          <h5 class="mb-1">Ahmed Ibrahim</h5>
+                          <p class="mb-0 text-muted">Youth Leader, 22 years old</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Story 2 -->
+                  <div class="carousel-item">
+                    <div class="youth-story-card">
+                      <div class="youth-story-content p-4 p-md-5">
+                        <div class="youth-story-quote">
+                          <i class="ri-double-quotes-l quote-icon"></i>
+                          <p class="mb-4">The Quranic studies program changed my relationship with the Quran. I went from barely being able to read to memorizing several surahs and understanding their meanings. The mentorship I received was invaluable.</p>
+                        </div>
+                        <div class="youth-story-author text-end">
+                          <h5 class="mb-1">Fatima Hassan</h5>
+                          <p class="mb-0 text-muted">Quran Program Graduate, 19 years old</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Story 3 -->
+                  <div class="carousel-item">
+                    <div class="youth-story-card">
+                      <div class="youth-story-content p-4 p-md-5">
+                        <div class="youth-story-quote">
+                          <i class="ri-double-quotes-l quote-icon"></i>
+                          <p class="mb-4">Through the community service initiatives, I've learned that my faith is not just about personal spirituality but about making a positive impact in the world. The monthly service days have become the highlight of my month.</p>
+                        </div>
+                        <div class="youth-story-author text-end">
+                          <h5 class="mb-1">Yusuf Omar</h5>
+                          <p class="mb-0 text-muted">Community Service Volunteer, 25 years old</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#youthStoriesCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#youthStoriesCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize tooltips and popovers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+            
+            // Make sure the mobile menu closes when a link is clicked
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {toggle: false});
+            
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth < 992) { // Only on mobile
+                        bsCollapse.hide();
+                    }
+                });
+            });
+            
+            // Handle dropdown items clicks
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    // Close the mobile menu if on mobile
+                    if (window.innerWidth < 992) {
+                        bsCollapse.hide();
+                    }
+                    
+                    // Close the parent dropdown
+                    const parentDropdown = this.closest('.dropdown-menu');
+                    if (parentDropdown) {
+                        const dropdownToggle = document.querySelector('[data-bs-toggle="dropdown"][aria-expanded="true"]');
+                        if (dropdownToggle) {
+                            const dropdown = new bootstrap.Dropdown(dropdownToggle);
+                            dropdown.hide();
+                        }
+                    }
+                });
+            });
+            
+            // Initialize main carousel with auto-sliding
+            const myCarousel = document.getElementById('carouselExampleCaptions');
+            const carousel = new bootstrap.Carousel(myCarousel, {
+                interval: 5000,  // Time in milliseconds between slides (5 seconds)
+                wrap: true,       // Whether the carousel should cycle continuously
+                touch: true,      // Whether the carousel should support left/right swipe on touchscreens
+                pause: 'hover'    // Pauses the cycling of the carousel when mouseenter, resumes when mouseleave
+            });
+            
+            // Initialize youth stories carousel
+            const youthStoriesCarousel = document.getElementById('youthStoriesCarousel');
+            if (youthStoriesCarousel) {
+                const storiesCarousel = new bootstrap.Carousel(youthStoriesCarousel, {
+                    interval: 8000,  // Time in milliseconds between slides (8 seconds)
+                    wrap: true,
+                    touch: true,
+                    pause: 'hover'
+                });
+            }
+        });
+    </script>
+
+    <!-- Footer Section -->
+    <footer class="text-white pt-5 pb-4" style="background-color: #141422;">
+      <div class="container">
+        <div class="row">
+          <!-- Contact Information -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <img src="img/youth-wing_logo-removebg-preview.png" alt="" class="mb-5" style="width: 100px; height: 100px; background-color: white; padding: 10px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <p class="mb-3"><i class="ri-map-pin-line me-2"></i>01, Address Location, City, State, Country. PO Box: 1234</p>
+            <p class="mb-3"><i class="ri-mail-line me-2"></i>info@sudaiyw.org</p>
+            <p class="mb-3"><i class="ri-phone-line me-2"></i>+234 812 345 6789</p>
+            <div class="social-links mt-4">
+              <a href="#" class="me-2 text-white"><i class="ri-facebook-fill"></i></a>
+              <a href="#" class="me-2 text-white"><i class="ri-twitter-fill"></i></a>
+              <a href="#" class="me-2 text-white"><i class="ri-instagram-line"></i></a>
+              <a href="#" class="me-2 text-white"><i class="ri-youtube-fill"></i></a>
+            </div>
+          </div>
+          
+          <!-- The Youthwing Links -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h5 class="text-uppercase mb-4">The Youthwing</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Formation & Founding</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Mission, Vision & Objectives</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Current National Executives</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Past National Executives</a></li>
+              <li class="mb-2"><a href="zonal.html" class="text-white text-decoration-none">Zonal Amir & Amirah</a></li>
+            </ul>
+          </div>
+
+          
+          <!-- Programs Links -->
+          <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+            <h5 class="text-uppercase mb-4">Programs</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Ramadan Lecture</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sister's Seminar</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Training the Trainers Course</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">SS3 Get-Together</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Master Class</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Islamic Training Course</a></li>
+            </ul>
+          </div>
+          
+          <!-- Get Involved Links -->
+          <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+            <h5 class="text-uppercase mb-4">Get Involved</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Membership Registration</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Become a Volunteer</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Make a Donation</a></li>
+              <li class="mb-2"><a href="#" class="text-white text-decoration-none">Partner with Us</a></li>
+            </ul>
+          </div>
+          
+          <!-- Newsletter Signup -->
+          <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+            <h5 class="text-uppercase mb-4">Newsletter</h5>
+            <p>Sign up for our newsletter to receive the latest updates.</p>
+            <form class="mt-3">
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Your email" aria-label="Your email" required>
+                <button class="btn btn-danger" type="submit">Subscribe</button>
+              </div>
+              <small class="form-text text-muted">By submitting your email, you'll be the first to know about upcoming updates. You can unsubscribe at any time.</small>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Copyright and Legal Links -->
+        <div class="row mt-4 pt-4 border-top border-secondary">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <p class="mb-0">&copy; 2025 SUDAI Youthwing. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Terms of Use</a></li>
+              <li class="list-inline-item mx-3">|</li>
+              <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
+              <li class="list-inline-item mx-3">|</li>
+              <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Cookies</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>
